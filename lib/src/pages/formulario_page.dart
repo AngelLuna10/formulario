@@ -8,12 +8,12 @@ class FormPage extends StatefulWidget {
 
 class _FormPageState extends State<FormPage> {
   FocusNode nombreFocus;
-  FocusNode apellidoFocus;
-  FocusNode edadFocus;
+  FocusNode emailFocus;
+  FocusNode passwordFocus;
 
   String nombre;
-  String apellido;
-  String edad;
+  String email;
+  String password;
 
   final formKey = GlobalKey<FormState>();
 
@@ -22,7 +22,7 @@ class _FormPageState extends State<FormPage> {
     return Container(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Formulario'),
+          title: Text('Angel Luna Cruz'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -31,6 +31,16 @@ class _FormPageState extends State<FormPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                
+                Container(
+                      width: 150.0,
+                      height: 150.0,
+                      child: Center(
+                        child: Image.network(
+                            'https://cdn6.f-cdn.com/contestentries/1463854/24749862/5c35de6584dc8_thumb900.jpg'),
+                      ),
+                    ),
+
                 TextFormField(
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
@@ -48,45 +58,45 @@ class _FormPageState extends State<FormPage> {
                     },
                     focusNode: this.nombreFocus,
                     onEditingComplete: () =>
-                      requestFocus(context, apellidoFocus),
+                      requestFocus(context, emailFocus),
                       textInputAction: TextInputAction.next,
                     ),
                 SizedBox(
-                  height: 10.0,
+                  height: 6.0,
                 ),
                 TextFormField(
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         labelText: 'Apellido',
-                        hintText: 'Ejemplo: Cruz',
-                        prefixIcon: Icon(Icons.person)),
+                        hintText: 'Ejemplo@example.com',
+                        prefixIcon: Icon(Icons.mail)),
                     //controller: apTextController,
                     onSaved: (value) {
-                      apellido = value;
+                      email = value;
                     },
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Campo vacio';
                       }
                       },
-                      focusNode: this.edadFocus,
+                      focusNode: this.passwordFocus,
                     onEditingComplete: () =>
-                      requestFocus(context, apellidoFocus),
+                      requestFocus(context, emailFocus),
                       textInputAction: TextInputAction.next,
                     ),
                 SizedBox(
-                  height: 10.0,
+                  height: 6.0,
                 ),
                
                 TextFormField(
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                        labelText: 'Edad',
-                        hintText: 'Ejemplo: 30',
-                        prefixIcon: Icon(Icons.person)),
+                        labelText: 'Password',
+                        hintText: 'Ejemplo: *****',
+                        prefixIcon: Icon(Icons.lock)),
                     //controller: apTextController,
                     onSaved: (value) {
-                      edad = value;
+                      password = value;
                     },
                     validator: (value){
                       if (value.isEmpty) {
@@ -94,26 +104,34 @@ class _FormPageState extends State<FormPage> {
                       }
                     }),
                 SizedBox(
-                  height: 10.0,
+                  height: 6.0,
                 ),
+
+                 
+                RaisedButton(
+                  color: Colors.blue.shade700,
+                  textColor: Colors.white,
+                  onPressed: () {},
+                  child: Text('Registrarse')),
                 
                 RaisedButton(
-                  color: Colors.blue,
+                  color: Colors.green.shade600,
                   textColor: Colors.white,
                   onPressed: () {
                     if (formKey.currentState.validate()) {
                       formKey.currentState.save();
-                      if (nombre.compareTo('Angel') == 0 &&
-                          apellido.compareTo('Luna') == 0) {
+                      if (nombre.compareTo('Angel Luna Cruz') == 0 &&
+                          email.compareTo('angel@gmail.com') == 0 &&
+                          password.compareTo('Luna') == 0) {
                         Navigator.pushNamed(context, 'formulario_dos',
                             arguments: Argumentos(
-                                nombre: this.nombre, apellido: this.apellido,edad: this.edad));
+                                nombre: this.nombre, email: this.email,password: this.password));
                       } else {
                         print('Datos incorrectos');
                       }
                     }
                   },
-                  child: Text('Enviar'),
+                  child: Text(' Iniciar '),
                 )
               ],
             ),
@@ -133,8 +151,8 @@ class _FormPageState extends State<FormPage> {
     //nombreTextController = TextEditingController();
     //apTextController = TextEditingController();
     nombreFocus = FocusNode();
-    apellidoFocus = FocusNode();
-    edadFocus = FocusNode();
+    emailFocus = FocusNode();
+    passwordFocus = FocusNode();
   }
 
   @override
@@ -143,16 +161,16 @@ class _FormPageState extends State<FormPage> {
     //nombreTextController.dispose();
     //apTextController.dispose();
     nombreFocus.dispose();
-    apellidoFocus.dispose();
-    edadFocus.dispose();
+    emailFocus.dispose();
+    passwordFocus.dispose();
   }
 }
 
 
 class Argumentos {
   String nombre;
-  String apellido;
-  String edad;
+  String email;
+  String password;
 
-  Argumentos({this.nombre, this.apellido, this.edad});
+  Argumentos({this.nombre, this.email, this.password});
 }
