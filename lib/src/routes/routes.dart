@@ -1,3 +1,4 @@
+import 'package:app_prac/src/pages/api_page.dart';
 import 'package:app_prac/src/pages/formulario_page.dart';
 import 'package:app_prac/src/pages/secondFormPage_page.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ import 'package:app_prac/src/pages/podcast_page.dart';
 
 Map <String, WidgetBuilder> obtenerRutas() {
   return <String, WidgetBuilder> {
-        '/' :(BuildContext context) => FormPage(),
+        '/' :(BuildContext context) => ApiPage(),
         'mapa' : (BuildContext context) => MapaPage(),
         'billetera' : (BuildContext context) => BilleteraPage(),
         'fotos' : (BuildContext context) => FotosPage(),
